@@ -115,3 +115,43 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+function haberYapici(haber) {
+  const articleOlustur = document.createElement("div");
+  articleOlustur.classList.add("article");
+
+  const h2Olustur = document.createElement("h2");
+  h2Olustur.textContent = haber.baslik;
+  articleOlustur.appendChild(h2Olustur);
+
+  const tarihOlustur = document.createElement("p");
+  tarihOlustur.classList.add("tarih");
+  tarihOlustur.textContent = haber.tarih;
+  articleOlustur.appendChild(tarihOlustur);
+  
+  const paragraf1 = document.createElement("p");
+  paragraf1.textContent = haber.ilkParagraf;
+  articleOlustur.appendChild(paragraf1);
+
+  const paragraf2 = document.createElement("p");
+  paragraf2.textContent = haber.ikinciParagraf;
+  articleOlustur.appendChild(paragraf2);
+
+  const paragraf3 = document.createElement("p");
+  paragraf3.textContent = haber.ucuncuParagraf;
+  articleOlustur.appendChild(paragraf3);
+
+  const expandButtonOlustur = document.createElement("span");
+  expandButtonOlustur.classList.add("expandButton");
+  expandButtonOlustur.textContent = "+";
+  expandButtonOlustur.addEventListener("click", (event) => {
+    const acikHaber = document.querySelector(".article-open");
+    if (acikHaber != null) acikHaber.classList.remove("article-open");
+    articleOlustur.classList.toggle("article-open");
+  });
+  articleOlustur.appendChild(expandButtonOlustur);
+  return articleOlustur;
+}
+const articles = document.querySelector(".articles");
+data.forEach((item) => {
+  articles.appendChild(haberYapici(item));
+});
